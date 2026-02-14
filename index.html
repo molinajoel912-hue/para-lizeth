@@ -3,120 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lizeth 💜 Mi Universo</title>
+<title>Lizeth 💜</title>
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
-  font-family: Arial, sans-serif;
+body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+  font-family:Arial, sans-serif;
 }
 
-#mensajeSuperior {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 20px;
-  z-index: 10;
-  background: rgba(0,0,0,0.4);
-  padding: 8px;
-  border-radius: 20px;
+#titulo{
+  position:absolute;
+  top:20px;
+  width:100%;
+  text-align:center;
+  color:white;
+  font-size:20px;
+  z-index:10;
 }
 
-#carta {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  max-width: 350px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  color: white;
-  padding: 15px;
-  border-radius: 15px;
-  text-align: center;
-  display: none;
-  z-index: 10;
+#btn{
+  position:absolute;
+  top:60px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(45deg,#a100ff,#ff00c8);
+  color:white;
+  font-size:14px;
+  z-index:10;
 }
 
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background: purple;
-  color: white;
-  font-size: 14px;
+#carta{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  width:80%;
+  max-width:350px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
+  color:white;
+  padding:15px;
+  border-radius:15px;
+  text-align:center;
+  display:none;
+  z-index:10;
 }
 </style>
 </head>
 <body>
 
-<div id="mensajeSuperior">
-  Te Amo Muchote Mi Lizeth Hermosa 💜✨
-</div>
+<div id="titulo">Te Amo Muchote Mi Lizeth Hermosa 💜✨</div>
+<button id="btn" onclick="mostrar()">Abrir Carta 💌</button>
 
 <div id="carta">
-  Lizeth... 💌<br><br>
-  Sos mi universo entero, mi estrella más brillante,
-  mi razón de sonreír todos los días.  
-  Gracias por existir y hacer mi mundo más bonito.  
-  Te amo infinito ♾️💜
+Lizeth 💜<br><br>
+Sos mi universo entero, mi estrella favorita ✨  
+Gracias por iluminar mi vida cada día.  
+Te amo infinito ♾️💜
 </div>
 
-<button onclick="mostrarCarta()" style="position:absolute;top:70px;left:50%;transform:translateX(-50%);z-index:10;">
-Abrir Carta 💌
-</button>
-
 <audio autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7a0e7f36f3.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/audio/2022/10/25/audio_946b94e7b3.mp3" type="audio/mpeg">
 </audio>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-camera.position.z = 5;
+camera.position.z = 4;
 
-// Planeta central
-const geometry = new THREE.SphereGeometry(1, 32, 32);
-const material = new THREE.MeshBasicMaterial({ color: 0x8000ff, wireframe: true });
+// Planeta brillante
+const geometry = new THREE.SphereGeometry(1, 64, 64);
+const material = new THREE.MeshStandardMaterial({
+  color: 0x8a2be2,
+  emissive: 0x5500aa,
+  metalness: 0.5,
+  roughness: 0.3
+});
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 
-// Estrellas
+// Luz
+const light = new THREE.PointLight(0xffffff,1.5);
+light.position.set(5,5,5);
+scene.add(light);
+
+// Estrellas pequeñas reales
 const starsGeometry = new THREE.BufferGeometry();
-const starsCount = 2000;
-const positions = [];
-
-for(let i = 0; i < starsCount; i++) {
-  positions.push((Math.random() - 0.5) * 50);
-  positions.push((Math.random() - 0.5) * 50);
-  positions.push((Math.random() - 0.5) * 50);
+const starVertices = [];
+for(let i=0;i<1500;i++){
+  starVertices.push((Math.random()-0.5)*100);
+  starVertices.push((Math.random()-0.5)*100);
+  starVertices.push((Math.random()-0.5)*100);
 }
+starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices,3));
+const starsMaterial = new THREE.PointsMaterial({color:0xffffff, size:0.2});
+const stars = new THREE.Points(starsGeometry, starsMaterial);
+scene.add(stars);
 
-starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff });
-const starField = new THREE.Points(starsGeometry, starsMaterial);
-scene.add(starField);
-
-function animate() {
+function animate(){
   requestAnimationFrame(animate);
-  sphere.rotation.y += 0.01;
-  starField.rotation.y += 0.0005;
-  renderer.render(scene, camera);
+  sphere.rotation.y += 0.005;
+  stars.rotation.y += 0.0008;
+  renderer.render(scene,camera);
 }
-
 animate();
 
-function mostrarCarta(){
-  document.getElementById("carta").style.display = "block";
+function mostrar(){
+  document.getElementById("carta").style.display="block";
 }
 </script>
 
