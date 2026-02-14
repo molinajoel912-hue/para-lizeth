@@ -1,112 +1,136 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Mi Ojitos Brillantes</title>
+<title>San Valentín Mágico</title>
 
-<!-- Fuente bonita -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-body {
+body{
   margin:0;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background: radial-gradient(circle at bottom, #020111 0%, #000000 80%);
-  font-family:'Poppins', sans-serif;
   overflow:hidden;
+  font-family:'Poppins', sans-serif;
+  background: radial-gradient(circle at center, #3b0015 0%, #1a0008 80%);
 }
 
-/* Estrellas */
-body::before {
+/* Brillo mágico */
+body::before{
   content:"";
   position:absolute;
   width:200%;
   height:200%;
-  background:transparent url("https://www.transparenttextures.com/patterns/stardust.png");
-  animation: moveStars 80s linear infinite;
-  opacity:0.5;
-  z-index:0;
+  background: radial-gradient(circle, rgba(255,105,180,0.15) 1px, transparent 1px);
+  background-size:40px 40px;
+  animation: sparkle 20s linear infinite;
+  opacity:0.4;
 }
 
-@keyframes moveStars {
-  from { transform: translateY(0); }
-  to { transform: translateY(-1000px); }
+@keyframes sparkle{
+  from{ transform:translateY(0);}
+  to{ transform:translateY(-200px);}
 }
 
-/* Libro */
-.book {
+/* Tarjeta romántica */
+.card{
   position:relative;
-  background: rgba(255, 240, 250, 0.95);
-  width: 90%;
-  max-width: 500px;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+  background: rgba(255, 230, 240, 0.95);
+  padding:50px;
+  width:90%;
+  max-width:500px;
+  border-radius:25px;
   text-align:center;
-  z-index:1;
+  box-shadow:0 0 60px rgba(255, 0, 100, 0.6);
+  z-index:2;
   animation: float 4s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes float{
+  0%,100%{ transform:translateY(0);}
+  50%{ transform:translateY(-12px);}
 }
 
-h1 {
+h1{
   font-family:'Playfair Display', serif;
+  color:#b3003c;
   font-size:2rem;
-  color:#d63384;
   margin-bottom:15px;
+  text-shadow:0 0 15px rgba(255,0,100,0.5);
 }
 
-p {
+p{
+  color:#5c0020;
   font-size:1.1rem;
-  color:#444;
-  line-height:1.6;
 }
 
-/* Botón */
-button {
-  margin-top:25px;
-  padding:12px 30px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg, #ff85c1, #ff4da6);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 15px rgba(255, 20, 147, 0.6);
-  transition:0.3s;
+/* Corazones flotando */
+.heart{
+  position:absolute;
+  color:#ff4d88;
+  font-size:20px;
+  animation: rise 8s linear infinite;
+  opacity:0.7;
 }
 
-button:hover {
-  transform:scale(1.08);
-  box-shadow:0 0 25px rgba(255, 20, 147, 0.9);
+@keyframes rise{
+  0%{ transform:translateY(100vh) scale(0.8);}
+  100%{ transform:translateY(-10vh) scale(1.2);}
+}
+
+/* Pétalos */
+.petal{
+  position:absolute;
+  width:15px;
+  height:15px;
+  background:#ff99bb;
+  border-radius:50% 50% 50% 0;
+  opacity:0.6;
+  animation: fall linear infinite;
+}
+
+@keyframes fall{
+  0%{ transform:translateY(-10vh) rotate(0deg);}
+  100%{ transform:translateY(110vh) rotate(360deg);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="book">
-  <h1>Te Amo Muchote Mis Ojitos Brillantes 💖✨</h1>
+<div class="card">
+  <h1>San Valentín Mágico 💖</h1>
   <p>
-    Lizeth, gracias por ser mi galaxia entera 🌌💫 <br><br>
-    Eres mi estrella favorita en este universo infinito.
+    Entre lo sobrenatural y el amor eterno…<br>
+    tú eres mi destino más bonito 🌸✨
   </p>
-
-  <button onclick="document.getElementById('music').play()">
-    Tocar Música 🎶
-  </button>
 </div>
 
-<audio id="music">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+<script>
+/* Corazones */
+for(let i=0;i<15;i++){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(6+Math.random()*4)+"s";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(heart);
+}
+
+/* Pétalos */
+for(let i=0;i<20;i++){
+  let petal=document.createElement("div");
+  petal.className="petal";
+  petal.style.left=Math.random()*100+"vw";
+  petal.style.animationDuration=(8+Math.random()*6)+"s";
+  document.body.appendChild(petal);
+}
+</script>
 
 </body>
 </html>
