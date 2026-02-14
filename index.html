@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Mi Ojitos Brillantes</title>
 
+<!-- Fuente bonita -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin:0;
@@ -12,12 +15,9 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
-  text-align:center;
-  font-family:Arial, sans-serif;
-  color:white;
-  overflow:hidden;
   background: radial-gradient(circle at bottom, #020111 0%, #000000 80%);
+  font-family:'Poppins', sans-serif;
+  overflow:hidden;
 }
 
 /* Estrellas */
@@ -27,8 +27,9 @@ body::before {
   width:200%;
   height:200%;
   background:transparent url("https://www.transparenttextures.com/patterns/stardust.png");
-  animation: moveStars 60s linear infinite;
-  opacity:0.6;
+  animation: moveStars 80s linear infinite;
+  opacity:0.5;
+  z-index:0;
 }
 
 @keyframes moveStars {
@@ -36,50 +37,72 @@ body::before {
   to { transform: translateY(-1000px); }
 }
 
-h1 {
-  font-size:2.5rem;
-  text-shadow:0 0 10px pink, 0 0 20px hotpink, 0 0 40px deeppink;
-  animation: glow 2s infinite alternate;
+/* Libro */
+.book {
+  position:relative;
+  background: rgba(255, 240, 250, 0.95);
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+  text-align:center;
+  z-index:1;
+  animation: float 4s ease-in-out infinite;
 }
 
-@keyframes glow {
-  from { text-shadow:0 0 10px pink; }
-  to { text-shadow:0 0 30px hotpink; }
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:2rem;
+  color:#d63384;
+  margin-bottom:15px;
 }
 
 p {
-  font-size:1.3rem;
-  margin-top:10px;
+  font-size:1.1rem;
+  color:#444;
+  line-height:1.6;
 }
 
+/* Botón */
 button {
   margin-top:25px;
-  padding:12px 25px;
+  padding:12px 30px;
   border:none;
   border-radius:30px;
-  background:linear-gradient(45deg, pink, hotpink);
+  background:linear-gradient(45deg, #ff85c1, #ff4da6);
   color:white;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 0 15px hotpink;
+  box-shadow:0 0 15px rgba(255, 20, 147, 0.6);
   transition:0.3s;
 }
 
 button:hover {
-  transform:scale(1.1);
-  box-shadow:0 0 25px deeppink;
+  transform:scale(1.08);
+  box-shadow:0 0 25px rgba(255, 20, 147, 0.9);
 }
 </style>
 </head>
 
 <body>
 
-<h1>Te Amo Muchote Mis Ojitos Brillantes 💖✨</h1>
-<p>Lizeth, gracias por ser mi galaxia entera 🌌💫</p>
+<div class="book">
+  <h1>Te Amo Muchote Mis Ojitos Brillantes 💖✨</h1>
+  <p>
+    Lizeth, gracias por ser mi galaxia entera 🌌💫 <br><br>
+    Eres mi estrella favorita en este universo infinito.
+  </p>
 
-<button onclick="document.getElementById('music').play()">
-Tocar Música 🎶
-</button>
+  <button onclick="document.getElementById('music').play()">
+    Tocar Música 🎶
+  </button>
+</div>
 
 <audio id="music">
   <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
