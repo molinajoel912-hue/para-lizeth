@@ -1,90 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Mi Ojitos Brillantes</title>
-
+<title>Lizeth 💜 Mi Universo</title>
 <style>
 body {
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-  font-family:Arial, sans-serif;
-  color:white;
-  overflow:hidden;
-  background: radial-gradient(circle at bottom, #020111 0%, #000000 80%);
+  margin: 0;
+  overflow: hidden;
+  background: black;
+  font-family: Arial, sans-serif;
 }
 
-/* Estrellas */
-body::before {
-  content:"";
-  position:absolute;
-  width:200%;
-  height:200%;
-  background:transparent url("https://www.transparenttextures.com/patterns/stardust.png");
-  animation: moveStars 60s linear infinite;
-  opacity:0.6;
+#mensajeSuperior {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  z-index: 10;
+  background: rgba(0,0,0,0.4);
+  padding: 8px;
+  border-radius: 20px;
 }
 
-@keyframes moveStars {
-  from { transform: translateY(0); }
-  to { transform: translateY(-1000px); }
-}
-
-h1 {
-  font-size:2.5rem;
-  text-shadow:0 0 10px pink, 0 0 20px hotpink, 0 0 40px deeppink;
-  animation: glow 2s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow:0 0 10px pink; }
-  to { text-shadow:0 0 30px hotpink; }
-}
-
-p {
-  font-size:1.3rem;
-  margin-top:10px;
+#carta {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 350px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  display: none;
+  z-index: 10;
 }
 
 button {
-  margin-top:25px;
-  padding:12px 25px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg, pink, hotpink);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 15px hotpink;
-  transition:0.3s;
-}
-
-button:hover {
-  transform:scale(1.1);
-  box-shadow:0 0 25px deeppink;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: purple;
+  color: white;
+  font-size: 14px;
 }
 </style>
 </head>
-
 <body>
 
-<h1>Te Amo Muchote Mis Ojitos Brillantes 💖✨</h1>
-<p>Lizeth, gracias por ser mi galaxia entera 🌌💫</p>
+<div id="mensajeSuperior">
+  Te Amo Muchote Mi Lizeth Hermosa 💜✨
+</div>
 
-<button onclick="document.getElementById('music').play()">
-Tocar Música 🎶
+<div id="carta">
+  Lizeth... 💌<br><br>
+  Sos mi universo entero, mi estrella más brillante,
+  mi razón de sonreír todos los días.  
+  Gracias por existir y hacer mi mundo más bonito.  
+  Te amo infinito ♾️💜
+</div>
+
+<button onclick="mostrarCarta()" style="position:absolute;top:70px;left:50%;transform:translateX(-50%);z-index:10;">
+Abrir Carta 💌
 </button>
 
-<audio id="music">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7a0e7f36f3.mp3" type="audio/mpeg">
 </audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+camera.position.z = 5;
+
+// Planeta central
+const geometry = new THREE.SphereGeometry(1, 32, 32);
+const material = new THREE.MeshBasicMaterial({ color: 0x8000ff, wireframe: true });
+const sphere = new THREE.Mesh(geometry, material);
+scene.add(sphere);
+
+// Estrellas
+const starsGeometry = new THREE.BufferGeometry();
+const starsCount = 2000;
+const positions = [];
+
+for(let i = 0; i < starsCount; i++) {
+  positions.push((Math.random() - 0.5) * 50);
+  positions.push((Math.random() - 0.5) * 50);
+  positions.push((Math.random() - 0.5) * 50);
+}
+
+starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff });
+const starField = new THREE.Points(starsGeometry, starsMaterial);
+scene.add(starField);
+
+function animate() {
+  requestAnimationFrame(animate);
+  sphere.rotation.y += 0.01;
+  starField.rotation.y += 0.0005;
+  renderer.render(scene, camera);
+}
+
+animate();
+
+function mostrarCarta(){
+  document.getElementById("carta").style.display = "block";
+}
+</script>
 
 </body>
 </html>
