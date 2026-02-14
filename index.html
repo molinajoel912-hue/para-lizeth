@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,75 +8,82 @@
 
 <style>
 body {
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    color:white;
-    font-family:Arial, sans-serif;
-    background:black;
-    overflow:hidden;
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  font-family:Arial, sans-serif;
+  color:white;
+  overflow:hidden;
+  background: radial-gradient(circle at bottom, #020111 0%, #000000 80%);
 }
 
-h1 {
-    font-size:2.5rem;
-    text-shadow:0 0 20px pink;
-    animation:glow 2s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow:0 0 10px pink; }
-    to { text-shadow:0 0 25px hotpink; }
-}
-
-p {
-    font-size:1.3rem;
-    margin-top:10px;
-}
-
-.stars {
-    position:fixed;
-    width:100%;
-    height:100%;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    background-size: cover;
-    animation:moveStars 80s linear infinite;
-    z-index:-1;
+/* Estrellas */
+body::before {
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:transparent url("https://www.transparenttextures.com/patterns/stardust.png");
+  animation: moveStars 60s linear infinite;
+  opacity:0.6;
 }
 
 @keyframes moveStars {
-    from {background-position:0 0;}
-    to {background-position:0 10000px;}
+  from { transform: translateY(0); }
+  to { transform: translateY(-1000px); }
+}
+
+h1 {
+  font-size:2.5rem;
+  text-shadow:0 0 10px pink, 0 0 20px hotpink, 0 0 40px deeppink;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow:0 0 10px pink; }
+  to { text-shadow:0 0 30px hotpink; }
+}
+
+p {
+  font-size:1.3rem;
+  margin-top:10px;
 }
 
 button {
-    margin-top:20px;
-    padding:10px 20px;
-    border:none;
-    border-radius:20px;
-    background:pink;
-    font-weight:bold;
-    cursor:pointer;
+  margin-top:25px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg, pink, hotpink);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 15px hotpink;
+  transition:0.3s;
+}
+
+button:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 25px deeppink;
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
-
-<h1>Te Amo Muchote Mis Ojitos Brillantes 💖</h1>
-<p>Lizeth, gracias por ser mi galaxia entera ✨</p>
+<h1>Te Amo Muchote Mis Ojitos Brillantes 💖✨</h1>
+<p>Lizeth, gracias por ser mi galaxia entera 🌌💫</p>
 
 <button onclick="document.getElementById('music').play()">
 Tocar Música 🎶
 </button>
 
-<audio id="music" autoplay loop>
-<source src="https://files.catbox.moe/0c6c1n.mp3" type="audio/mpeg">
+<audio id="music">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
 </body>
